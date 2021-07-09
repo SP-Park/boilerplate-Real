@@ -5,6 +5,7 @@ import {
     REGISTER_USER,
     AUTH_USER,
     LOGOUT_USER,
+    GET_USERS_LIST
 } from './types';
 
 export function loginUser(body) {
@@ -43,6 +44,16 @@ export function logoutUser() {
 
     return {
         type: LOGOUT_USER,
+        payload: request
+    }
+}
+
+export function getUsersList() {
+    const request = axios.get(`${USER_SERVER}/userslist`)
+    .then(response => response.data);
+
+    return {
+        type: GET_USERS_LIST,
         payload: request
     }
 }

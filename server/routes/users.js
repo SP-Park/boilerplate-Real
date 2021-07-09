@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { randomBytes } from 'crypto';
 const { User } = require('../models/User');
 const { auth } = require("../middleware/auth");
+import { pick } from 'lodash';
 
 const router = Router()
 
@@ -81,6 +82,16 @@ router.post("/login", (req, res) => {
         });
     });
 });
+
+router.get('/userslist', auth, async (req, res) => {
+    let users = await User.find().select('-password')
+    if(!users) {
+        return res.status(400).json({ success: false, message: 'Could not find users'})
+    }
+    return res.status(200).json({ success: true, usersInfo: users })
+
+})
+
 
 router.get("/logout", auth, (req, res) => {
     User.findOneAndUpdate({ _id: req.user._id }, { token: "", tokenExp: "" }, (err, doc) => {

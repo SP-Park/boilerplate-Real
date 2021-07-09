@@ -1,7 +1,7 @@
 import './Menu.css';
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { Nav, Form, Button, FormControl, Navbar} from 'react-bootstrap';
+import { Nav, Form, Button, FormControl, Navbar, Image, NavDropdown } from 'react-bootstrap';
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../../actions/user_actions";
 import user_reducer from '../../../reducers/user_reducer';
@@ -24,13 +24,14 @@ function Menu(props) {
               }
         })
     }
+    // console.log(user)
 
 
     if(user.userData && !user.userData.isAuth) {
 
         return (
             <div>
-            <Navbar bg="dark" variant="dark" className="nav_main">
+            <Navbar bg="dark" variant="dark" className="nav_main" fixed="top">
                 <Navbar.Brand href="/">
                     <img
                         alt=""
@@ -58,9 +59,9 @@ function Menu(props) {
     } else {
         return (
             <div>
-                <Navbar bg="dark" variant="dark">
+                <Navbar bg="dark" variant="dark" fixed="top">
                     <Navbar.Brand href="/">
-                        <img
+                        <Image 
                             alt=""
                             src="/logo.svg"
                             width="30"
@@ -77,7 +78,25 @@ function Menu(props) {
                     <Form inline>
                     <FormControl type="text" placeholder="Search" className="mr-sm-2" />
                     <Button variant="outline-info">Search</Button>
-                    <Nav.Link onClick={logoutHandler}>Logout</Nav.Link>
+                    {user.userData && 
+                    <NavDropdown title={user.userData.name.toUpperCase()} id="collasible-nav-dropdown" className="dropdown_right">
+                        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                        <NavDropdown.Divider />
+                        <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
+                    </NavDropdown>
+                    }
+                    {/* <Nav.Link onClick={logoutHandler}>Logout</Nav.Link> */}
+                    <Navbar.Brand href="#home">
+                        <img
+                            src="https://images.unsplash.com/photo-1625115124815-df60088656f2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+                            width="30"
+                            height="30"
+                            className="topAvatar"
+                            alt="avatar"
+                        />
+                </Navbar.Brand>
                     </Form>
                 </Navbar>
             </div>
