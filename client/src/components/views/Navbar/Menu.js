@@ -87,10 +87,9 @@ function Menu(props) {
                         <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
                     </NavDropdown>
                     }
-                    {/* <Nav.Link onClick={logoutHandler}>Logout</Nav.Link> */}
-                    <Navbar.Brand href="#home">
+                    <Navbar.Brand href="#avatar">
                         <img
-                            src="https://images.unsplash.com/photo-1625115124815-df60088656f2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+                            src='/people1.jpg'
                             width="30"
                             height="30"
                             className="topAvatar"

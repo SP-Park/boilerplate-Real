@@ -3,6 +3,7 @@ import { Form, Button } from 'react-bootstrap';
 import { useDispatch } from "react-redux";
 import { registerUser } from '../../actions/user_actions';
 import { useForm } from 'react-hook-form';
+import FileUpload from '../Utils/FileUpload';
 
 function RegisterPage(props) {
 
@@ -28,6 +29,7 @@ function RegisterPage(props) {
     return (
         <div className="container">
             <Form onSubmit={handleSubmit(onSubmit)}>
+                <FileUpload />
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control 
@@ -64,7 +66,7 @@ function RegisterPage(props) {
                     {errors.password && errors.password.type === "minLength" && <p>Password must have 6 at least characters.</p>}
                 </Form.Group>
                 <Form.Group controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label>password_confirm</Form.Label>
                      <Form.Control 
                         name="password_confirm" 
                         type="password" 

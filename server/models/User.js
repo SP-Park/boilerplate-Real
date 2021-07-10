@@ -28,7 +28,10 @@ const UserSchema = mongoose.Schema({
         type:Number,
         default: 0 
     },
-    image: String,
+    images: {
+        type: Array,
+        default: []
+    },
     token : {
         type: String,
     },
@@ -72,6 +75,12 @@ UserSchema.pre('save', function( next ) {
         next()
     }
 });
+
+
+
+UserSchema.pre('findByIdAndUpdate', async function () {
+    this._update.password = await bcrypt.hash(this._update.password, 10)
+  })
 
 UserSchema.methods.comparePassword = function (plainPassword, cb) {
     bcrypt.compare(plainPassword, this.password, function (err, isMatch) {

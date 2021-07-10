@@ -26,7 +26,7 @@ function Sidebar(props) {
                     setexpanded(false)
                 }}
             > */}
-            <SideNav 
+            <SideNav
                 className="side_main" 
                 onSelect={onSelect}
                 expanded={expanded}

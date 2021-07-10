@@ -29,6 +29,7 @@ app.use(express.json());
 
 app.use('/api/users', userApis);
 
+app.use('/uploads', express.static('uploads'));
 
 const port = 5000
 

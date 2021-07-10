@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
+import Charts from './Charts/Charts';
 
 function LandingPage() {
     return (
         <div className="container">
-           LandingPage
+           <Charts />
         </div>
     )
 }
