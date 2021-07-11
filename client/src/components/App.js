@@ -1,6 +1,8 @@
+import './App.css';
 import React, { Suspense } from 'react';
 import { BrowserRouter ,Route, Switch } from "react-router-dom";
 import Auth from "../hoc/auth";
+import { Container } from 'react-bootstrap';
 
 //Page
 import LandingPage from './views/LandingPage';
@@ -18,11 +20,12 @@ function App() {
 
 
     return (
+        <Container className="App">
         <BrowserRouter>
         <Suspense fallback={(<div>Loading...</div>)}>
         <Menu />
-        <Sidebar />
-            <div style={{ paddingTop: '120px', marginLeft: '100px', marginRight: '40px', minHeight: 'calc(100vh - 80px)' }}>
+            <Container className='main'>
+                <Sidebar />
                 <Switch>
                     <Route exact path="/" component={Auth(LandingPage, null)} /> 
                     <Route exact path="/login" component={Auth(LoginPage, false)} />
@@ -31,10 +34,10 @@ function App() {
                     <Route exact path="/newuser" component={Auth(NewUser, true, 2)} />
                     <Route exact path="/users/:id" component={Auth(EditUser, true, 2)} />        
                 </Switch>
-                
-            </div>
+                </Container>
             </Suspense>
         </BrowserRouter>
+        </Container>
     )
 }
 

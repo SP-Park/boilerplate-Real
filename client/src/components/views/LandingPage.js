@@ -1,11 +1,12 @@
 import React from 'react';
 import Charts from './Charts/Charts';
+import { Container } from 'react-bootstrap';
 
 function LandingPage() {
     return (
-        <div className="container">
+        <Container>
            <Charts />
-        </div>
+        </Container>
     )
 }
 

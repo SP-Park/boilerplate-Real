@@ -1,8 +1,6 @@
-import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
-import 'bootstrap/dist/css/bootstrap.css';
 
 import Reducer from './reducers';
 import { Provider } from 'react-redux';

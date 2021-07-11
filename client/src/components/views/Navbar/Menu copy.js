@@ -1,21 +1,17 @@
 import './Menu.css';
-import React, { useState } from 'react';
+import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Nav, Form, Button, FormControl, Navbar, Image, NavDropdown } from 'react-bootstrap';
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../../actions/user_actions";
 import user_reducer from '../../../reducers/user_reducer';
 import { useSelector } from "react-redux";
-import { Link } from 'react-router-dom';
-import { AiOutlineClose, AiOutlineBars } from "react-icons/ai";
-import { SidebarData } from './SidebarData';
 
 const navWidthCollapsed = 64;
 const navWidthExpanded = 280;
 
 function Menu(props) {
 
-    const [Sidebar, setSidebar] = useState(false)
     const user = useSelector(state => state.user)
     const dispatch = useDispatch();
     const logoutHandler = () => {
@@ -30,11 +26,11 @@ function Menu(props) {
     }
     // console.log(user)
 
-    const showSidebar = () => setSidebar(!Sidebar)
 
     if(user.userData && !user.userData.isAuth) {
 
         return (
+            <div>
             <Navbar bg="dark" variant="dark" className="nav_main" fixed="top">
                 <Navbar.Brand href="/">
                     <img
@@ -58,9 +54,11 @@ function Menu(props) {
                 <Nav.Link href="/register">register</Nav.Link>
                 </Form>
             </Navbar>
+        </div>
         )
     } else {
         return (
+            <div>
                 <Navbar bg="dark" variant="dark" fixed="top">
                     <Navbar.Brand href="/">
                         <Image 
@@ -106,6 +104,7 @@ function Menu(props) {
                     </Navbar.Brand>
                     </Form>
                 </Navbar>
+            </div>
         )
     }
 
