@@ -2,7 +2,7 @@ import './UsersList.css';
 import React, { useEffect, useState } from 'react';
 import { Table, Button,Popover,OverlayTrigger } from 'react-bootstrap';
 import { useDispatch } from "react-redux";
-import { getUsersList } from '../../../actions/user_actions';
+import { getUsersList, deleteUser } from '../../../actions/user_actions';
 
 function UsersList (props) {
 
@@ -46,6 +46,17 @@ function UsersList (props) {
         </OverlayTrigger>
     );
 
+    const HandleDelete = (id) => {
+        dispatch(deleteUser(id))
+        .then (response => {
+            if(response.payload.success) {
+                window.location.reload();
+            } else {
+                alert(response.payload.err.errmsg)
+            }
+        })
+    }
+
     return (
 
         <div className="container">
@@ -82,7 +93,7 @@ function UsersList (props) {
                             <td>{roles(item.role)}</td>
                             <td>{item.createdAt}</td>
                             <td><Button href={`/users/${item._id}`} variant="warning" size="sm">Edit</Button></td>
-                            <td><Button variant="danger" size="sm">Delete</Button></td>
+                            <td><Button onClick={() => HandleDelete(item._id)} variant="danger" size="sm">Delete</Button></td>
 
                         </tr>
                     ))}

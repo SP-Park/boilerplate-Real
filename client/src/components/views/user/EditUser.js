@@ -12,6 +12,7 @@ function EditUser(props) {
     const userId = props.match.params.id
 
     const [UserInfo, setUserInfo] = useState({})
+    const [Images, setImages] = useState([])
     const { register, handleSubmit, watch, errors, setValue } = useForm();
 
     console.log(userId)
@@ -22,12 +23,13 @@ function EditUser(props) {
             const fields = ['email', 'name', 'role', 'address'];
             fields.forEach(field => setValue(field, response.data[0][field]));
             setUserInfo(response.data[0])
-            console.log(response.data[0])
+            setImages(response.data[0].images)
+            console.log(response.data[0].images)
         })
         .catch(err => alert(err))
     }, [])
 
-    const [Images, setImages] = useState([])
+    
     
     const password = useRef()
     password.current = watch('password')

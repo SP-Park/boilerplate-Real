@@ -6,7 +6,8 @@ import {
     AUTH_USER,
     LOGOUT_USER,
     GET_USERS_LIST,
-    UPDATE_USER
+    UPDATE_USER,
+    DELETE_USERS_LIST
 } from './types';
 
 export function loginUser(body) {
@@ -68,3 +69,15 @@ export function getUsersList() {
         payload: request
     }
 }
+
+export function deleteUser(id) {
+    const request = axios.get(`${USER_SERVER}/delete_user/${id}`)
+    .then(response => response.data);
+
+    return {
+        type: DELETE_USERS_LIST,
+        payload: request
+    }
+}
+
+

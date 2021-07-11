@@ -1,9 +1,14 @@
 import { Router } from 'express';
+const mongoose = require('mongoose');
 import { randomBytes } from 'crypto';
 const { User } = require('../models/User');
 const { auth } = require("../middleware/auth");
 import { pick, reduce } from 'lodash';
 import multer from 'multer';
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
+
 
 const router = Router()
 
@@ -120,7 +125,7 @@ router.get('/userslist', auth, async (req, res) => {
 
 
 router.get("/logout", auth, (req, res) => {
-    User.findByIdAndUpdate({ _id: req.user._id }, { token: "", tokenExp: "" }, (err, doc) => {
+    User.findOneAndUpdate({ _id: req.user._id }, { token: "", tokenExp: "" }, (err, doc) => {
         if (err) return res.json({ success: false, err });
         return res.status(200).send({
             success: true
@@ -141,13 +146,31 @@ router.get('/user_by_id', async (req, res) => {
 router.put('/register/:id', async (req, res) => {
     try {
         const  { id } = req.params;
-        console.log(req.parmas)
-        let userUpdate = await User.findOneAndUpdate(id,
+        const { password } = req.body;
+        console.log(req.body)
+        
+        let salt = await bcrypt.genSalt(saltRounds)
+        if(!salt) return res.status(400).json({
+            success: false, 
+            message: 'salt is not generated'
+        })
+        
+
+        let hash_password = await bcrypt.hash(password, salt)
+        if(!password) return res.status(400).json({
+            success: false,
+            message: 'Password is not generated'
+        })
+
+
+        let userUpdate = await User.findByIdAndUpdate(id,
             { 
                 email: req.body.email, 
                 name: req.body.name,
-                password: req.body.password,
-                role: req.body.role 
+                password: hash_password,
+                role: req.body.role,
+                images: req.body.images,
+                address: req.body.address 
             },
             { new: true }
         )
@@ -160,11 +183,17 @@ router.put('/register/:id', async (req, res) => {
             success: false, err
         })
     }
-
-
-    
-
 })
+
+router.get('/delete_user/:id', async (req, res) => {
+    const { id } = req.params;
+    await User.findByIdAndDelete(id);
+    return res.status(200).json({
+        success: true
+    })
+})
+
+
 
 // app.put('/campgrounds/:id', async (req, res) => {
 //     const { id } = req.params;

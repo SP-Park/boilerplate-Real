@@ -78,9 +78,9 @@ UserSchema.pre('save', function( next ) {
 
 
 
-UserSchema.pre('findByIdAndUpdate', async function () {
-    this._update.password = await bcrypt.hash(this._update.password, 10)
-  })
+// UserSchema.pre('findByIdAndUpdate', async function () {
+//     this._update.password = await bcrypt.hash(this._update.password, 10)
+//   })
 
 UserSchema.methods.comparePassword = function (plainPassword, cb) {
     bcrypt.compare(plainPassword, this.password, function (err, isMatch) {

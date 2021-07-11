@@ -4,7 +4,8 @@ import {
     AUTH_USER,
     LOGOUT_USER,
     GET_USERS_LIST,
-    UPDATE_USER
+    UPDATE_USER,
+    DELETE_USERS_LIST
 } from '../actions/types';
 
 export default function (state = {}, action ) {
@@ -21,6 +22,8 @@ export default function (state = {}, action ) {
             return {...state, usersInfo:action.payload }
         case UPDATE_USER:
             return {...state, userUpdate:action.payload }
+        case DELETE_USERS_LIST:
+            return {...state, usersInfo:action.payload }
         default:
             return state;
     }
