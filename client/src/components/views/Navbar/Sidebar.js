@@ -19,7 +19,7 @@ function Sidebar() {
                         
                             <li className='nav-text' style={{ color:'#f5f5f5', textAlign: 'center', height:'70px', marginTop: '10px' }}>
                                 HELLO ! <br />
-                                { user.userData && user.userData.name.toUpperCase() }
+                                { user.userData && user.userData.name }
                                 
                             </li>
                             <hr className="nav-hr" style={{ marginTop: 0, color: '#f5f5f5', height: 1, background: '#f5f5f5' }}/>
