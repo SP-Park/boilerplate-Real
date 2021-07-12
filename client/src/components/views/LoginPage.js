@@ -21,7 +21,7 @@ function LoginPage(props) {
     }
 
     return (
-        <div className="container">
+        <div className="container" style={{ marginTop: '30px' }}>
             <div className="app">
             <Form onSubmit={handleSubmit(onSubmit)} style={{ width: '350px' }}>
                 <Form.Group controlId="formBasicEmail">

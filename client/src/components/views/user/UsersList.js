@@ -59,13 +59,14 @@ function UsersList (props) {
 
     return (
 
-        <div className="container">
+        <div className="container" style={{ marginTop: '30px' }}>
             <div className="userList_header">
                 <h2>Users Information</h2>
                 <Example />
             </div>
             <br />
             <div>
+{Data && Data.length > 0 &&
             <Table striped bordered hover size="sm" style={{ textAlign: 'center', justifyContent: 'center', alignContent: 'center' }}>
                 <thead>
                     <tr>
@@ -78,6 +79,7 @@ function UsersList (props) {
                     </tr>
                 </thead>
                 <tbody>
+                    
                     {Data.map((item, index) => (
                         <tr index={item._id}>
                             <td style={{ padding: 0 }}>
@@ -100,6 +102,7 @@ function UsersList (props) {
                     
                 </tbody>
             </Table>
+}
             </div>
         </div>
     )

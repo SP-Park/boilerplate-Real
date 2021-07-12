@@ -1,6 +1,6 @@
 .App {
     display: flex;
-    margin-top: 74px;
+    margin-top: 0px;
     margin-left: 0px !important;
     margin-right: 0px !important;
     padding-left: 0px !important;
@@ -9,4 +9,6 @@
 
 .main {
     padding: 0 0 0 0 !important;
+    display: flex; 
+    margin-top: 56px;
 }

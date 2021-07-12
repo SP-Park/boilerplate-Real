@@ -30,7 +30,6 @@ function Menu(props) {
     }
     // console.log(user)
 
-    const showSidebar = () => setSidebar(!Sidebar)
 
     if(user.userData && !user.userData.isAuth) {
 
@@ -73,20 +72,22 @@ function Menu(props) {
                         React Bootstrap
                     </Navbar.Brand>
                     <Nav className="mr-auto">
-                    <Nav.Link href="/">Home</Nav.Link>
+                    {/* <Nav.Link href="/">Home</Nav.Link>
                     <Nav.Link href="#features">Features</Nav.Link>
-                    <Nav.Link href="#pricing">Pricing</Nav.Link>
-                    </Nav>
-                    <Form inline>
+                    <Nav.Link href="#pricing">Pricing</Nav.Link> */}
                     <FormControl type="text" placeholder="Search" className="mr-sm-2" />
                     <Button variant="outline-info">Search</Button>
+                    </Nav>
+                    <Form inline>
+                    {/* <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                    <Button variant="outline-info">Search</Button> */}
                     {user.userData && 
                     <NavDropdown title={user.userData.name.toUpperCase()} id="collasible-nav-dropdown" className="dropdown_left">
-                        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.1">MY PROFILE</NavDropdown.Item>
                         <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
                         <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
+                        <NavDropdown.Item onClick={logoutHandler}>LOGOUT</NavDropdown.Item>
                     </NavDropdown>
                     }
                     <Navbar.Brand href="#avatar">

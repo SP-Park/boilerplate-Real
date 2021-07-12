@@ -20,11 +20,11 @@ function App() {
 
 
     return (
-        <Container className="App">
+        <Container fluid className="App">
         <BrowserRouter>
         <Suspense fallback={(<div>Loading...</div>)}>
         <Menu />
-            <Container className='main'>
+            <Container fluid className='main'>
                 <Sidebar />
                 <Switch>
                     <Route exact path="/" component={Auth(LandingPage, null)} /> 

@@ -27,7 +27,7 @@ function RegisterPage(props) {
 
 
     return (
-        <div className="container">
+        <div className="container" style={{ marginTop: '30px' }}>
             <Form onSubmit={handleSubmit(onSubmit)}>
                 <FileUpload />
                 <Form.Group controlId="formBasicEmail">

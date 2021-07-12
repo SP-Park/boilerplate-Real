@@ -1,11 +1,11 @@
-import { AiOutlineHome, AiOutlineUsergroupAdd } from "react-icons/ai";
+import { AiFillPieChart, AiOutlineHome, AiOutlineUsergroupAdd } from "react-icons/ai";
 
 
 export const SidebarData = [
     {
-        title: 'HOME',
+        title: 'DASHBOARD',
         path: '/',
-        icon: <AiOutlineHome />,
+        icon: <AiFillPieChart />,
         cName: 'nav-text'
     },
     {

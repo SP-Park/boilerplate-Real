@@ -64,7 +64,7 @@ function EditUser(props) {
     
 
     return (
-        <div className="container">
+        <div className="container" style={{ marginTop: '30px' }}>
             <Form onSubmit={handleSubmit(onSubmit)}>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Avatar Upload</Form.Label>

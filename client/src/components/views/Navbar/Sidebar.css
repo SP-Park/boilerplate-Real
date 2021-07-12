@@ -1,11 +1,25 @@
 .sidebar {
-    flex: 1;
+    /* flex: 1; */
+    width: 200px;
     height: calc(100vh - 50px);
-    background-color: rgb(240, 222, 216);
+    background-color: #343a40;
     position: sticky;
     top: 50px;
+    justify-content: center;
+    align-items: center;
 }
 .sidebarWrapper {
-    padding: 20px;
+    padding: 0px;
     color: #555;
+
+}
+
+.nav-menu-items {
+    padding: 0;
+    justify-content: center;
+}
+
+.nav-text {
+    justify-content: center;
+    align-items: center;
 }
