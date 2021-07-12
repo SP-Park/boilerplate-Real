@@ -2,6 +2,14 @@ import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts'
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
 import { Container ,Row, Col } from 'react-bootstrap';
 import _ from 'lodash';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { getUsersList } from '../../../actions/user_actions';
+import axios from 'axios';
+import { USER_SERVER } from '../../Config';
+
+
 
 const data = [
     {name: 'Page A', uv: '400', pv: '2400', amt: '2400'},
@@ -14,6 +22,9 @@ const data = [
     {name: 'Page H', uv: '300', pv: '2400', amt: '2400'},
     {name: 'Page I', uv: '300', pv: '2400', amt: '2400'},
 ];
+
+
+
 
 // const data_1 = [
 //     { name: 'Group A', value: 400 },
@@ -39,16 +50,77 @@ const data = [
 
 
 function Charts(props){
+    
+    const dispatch = useDispatch()
+    const user = useSelector(state => state.user.usersInfo)
+    const [Role2, setRole2]= useState(0)
+    const [Role1, setRole1]= useState(0)
+    const [Role0, setRole0]= useState(0)
 
-            
-    let role2 = _.filter(props.UserCount, item => item.role == 2)
-    let role1 = _.filter(props.UserCount, item => item.role == 1)
-    let role0 = _.filter(props.UserCount, item => item.role == 0)
+    useEffect(() => {
+        if(props.UserCount) {
+            let role2, role1, role0 = 0
 
-            console.log(role2.length)
-            console.log(role1.length)
-            console.log(role0.length)
+            role2 = _.filter(props.UserCount, item => item.role == 2)
+            role1 = _.filter(props.UserCount, item => item.role == 1)
+            role0 = _.filter(props.UserCount, item => item.role == 0)
+            console.log('1',props.UserCount)
 
+            setRole2(role2.length)
+            setRole1(role1.length)
+            setRole0(role0.length)
+        } else {
+            console.log('something wrong')
+        }
+
+    },[props.UserCount])
+
+    console.log('redux', user)
+
+    console.log('roles', Role2,Role1,Role0)
+    console.log('2',props.UserCount)
+
+    if (props.UserCount && props.UserCount != 0 ) {
+        console.log('1_roles', Role2,Role1,Role0)
+    }
+
+    // const user = useSelector(state => state.user.usersInfo)
+    // const userProps = props.UserCount
+    // console.log(user)
+    // console.log(userProps)
+
+    
+    
+    // let role2, role1, role0 = 0
+    // let role_data = []
+
+    
+    // console.log('2', UserCount)
+    //     if(UserCount.length >= 1) {
+    //         role2 = _.filter(UserCount, item => item.role == 2)
+    //         role1 = _.filter(UserCount, item => item.role == 1)
+    //         role0 = _.filter(UserCount, item => item.role == 0)
+    
+    //         role_data = [
+    //             { name: 'Super Admin', value: parseInt(role2, 10) },
+    //             { name: 'Admin', value: parseInt(role1, 10) },
+    //             { name: 'User', value: parseInt(role0, 10) }
+    //         ]
+    //     }
+
+
+
+
+    // console.log(role0, role1, role2)  
+    // console.log(role_data)
+    
+    
+  
+    
+    
+    // console.log(props)
+
+// console.log(role_data)
 
     return (
             <Row>
@@ -66,7 +138,7 @@ function Charts(props){
                 <ResponsiveContainer width="100%" height="100%">
                             <PieChart width={300} height={400}>
                             <Pie
-                                data={data_1}
+                                data={data}
                                 cx="50%"
                                 cy="50%"
                                 labelLine={false}
@@ -75,7 +147,7 @@ function Charts(props){
                                 fill="#8884d8"
                                 dataKey="value"
                             >
-                                {data_1.map((entry, index) => (
+                                {data.map((entry, index) => (
                                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                                 ))}
                             </Pie>
@@ -87,7 +159,7 @@ function Charts(props){
                 <ResponsiveContainer width="100%" height="100%">
                             <PieChart width={300} height={400}>
                             <Pie
-                                data={data_1}
+                                data={data}
                                 cx="50%"
                                 cy="50%"
                                 labelLine={false}
@@ -96,7 +168,7 @@ function Charts(props){
                                 fill="#8884d8"
                                 dataKey="value"
                             >
-                                {data_1.map((entry, index) => (
+                                {data.map((entry, index) => (
                                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                                 ))}
                             </Pie>

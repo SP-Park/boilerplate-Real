@@ -14,8 +14,11 @@ function LandingPage() {
         dispatch(getUsersList())
         .then (response => {
             setUserCount(response.payload.usersInfo)
+            console.log(response.payload.usersInfo)
         })
+        .catch(err => alert(err))
     },[])
+
 
     return (
         <Container fluid style={{ marginTop: '30px' }}>
