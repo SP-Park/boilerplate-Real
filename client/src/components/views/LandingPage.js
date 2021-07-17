@@ -88,8 +88,6 @@ function LandingPage() {
 
     return (
         <Container fluid style={{ marginTop: '30px' }}>
-            <br />
-            <hr />
 
                <Charts PieData={fetchData} />
     

@@ -1,21 +1,14 @@
 import './Menu.css';
-import React, { useState } from 'react';
+import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { Nav, Form, Button, FormControl, Navbar, Image, NavDropdown } from 'react-bootstrap';
+import { Nav, Form, Button, FormControl, Navbar, Image, NavDropdown, Container } from 'react-bootstrap';
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../../actions/user_actions";
-import user_reducer from '../../../reducers/user_reducer';
 import { useSelector } from "react-redux";
-import { Link } from 'react-router-dom';
-import { AiOutlineClose, AiOutlineBars } from "react-icons/ai";
-import { SidebarData } from './SidebarData';
 
-const navWidthCollapsed = 64;
-const navWidthExpanded = 280;
 
 function Menu(props) {
 
-    const [Sidebar, setSidebar] = useState(false)
     const user = useSelector(state => state.user)
     const dispatch = useDispatch();
     const logoutHandler = () => {
@@ -34,7 +27,8 @@ function Menu(props) {
     if(user.userData && !user.userData.isAuth) {
 
         return (
-            <Navbar bg="dark" variant="dark" className="nav_main" fixed="top">
+            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" className="nav_main" fixed="top"  style={{ height: '50px' }} >
+                <Container fluid>
                 <Navbar.Brand href="/">
                     <img
                         alt=""
@@ -46,9 +40,7 @@ function Menu(props) {
                     React Bootstrap
                 </Navbar.Brand>
                 <Nav className="mr-auto">
-                <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="#features">Features</Nav.Link>
-                <Nav.Link href="#pricing">Pricing</Nav.Link>
+
                 </Nav>
                 <Form inline>
                 <FormControl type="text" placeholder="Search" className="mr-sm-2" />
@@ -56,11 +48,12 @@ function Menu(props) {
                 <Nav.Link href="/login">Login</Nav.Link>
                 <Nav.Link href="/register">register</Nav.Link>
                 </Form>
+                </Container>
             </Navbar>
         )
     } else {
         return (
-                <Navbar bg="dark" variant="dark" fixed="top">
+                <Navbar bg="dark" variant="dark" fixed="top"  style={{ height: '50px' }} >
                     <Navbar.Brand href="/">
                         <Image 
                             alt=""

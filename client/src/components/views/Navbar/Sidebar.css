@@ -1,9 +1,9 @@
 .sidebar {
-    /* flex: 1; */
+    position: fixed;
     width: 200px;
     height: calc(100vh - 50px);
-    background-color: #343a40;
-    position: sticky;
+    /* background-color: #343a40; */
+    background-color: white;
     top: 50px;
     justify-content: center;
     align-items: center;

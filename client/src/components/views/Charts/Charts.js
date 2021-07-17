@@ -1,10 +1,9 @@
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Cell} from 'recharts';
 import { Container, Row, Col, Spinner } from 'react-bootstrap';
 import _ from 'lodash';
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { USER_SERVER } from '../../Config';
+import React from 'react';
+
 
 
 
@@ -45,6 +44,7 @@ function Charts(props) {
   return (
     <Row>
       <Col xs>
+        <Container >
         <h3>Users Behavior</h3>
         <LineChart width={700} height={400} data={data} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
           <Line type="monotone" dataKey="uv" stroke="#8884d8" />
@@ -53,6 +53,7 @@ function Charts(props) {
           <YAxis />
           <Tooltip />
         </LineChart>
+        </Container>
       </Col>
 
 
