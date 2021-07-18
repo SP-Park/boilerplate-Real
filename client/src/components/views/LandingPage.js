@@ -61,33 +61,23 @@ function LandingPage() {
           )
       }, [])
 
-    // const datacollector = async () => {
-    //     let role2 = _.filter(fetchData, item => item.role == 2)
-    //     let role1 = _.filter(fetchData, item => item.role == 1)
-    //     let role0 = _.filter(fetchData, item => item.role == 0)
-
-    //     let Role2 = role2.length
-    //     let Role1 = role1.length
-    //     let Role0 = role0.length
-
-    //     let arrayData = [
-    //         { name: 'Super Admin', value: Role2 },
-    //         { name: 'Admin', value: Role1 },
-    //         { name: 'Users', value: Role0 }
-    //     ]
-
-    //     setPieData(arrayData)
-    //     return null
-    // }
-
-    // useEffect(() => {
-    //     datacollector();
-    // })
-
-
 
     return (
         <Container fluid style={{ marginTop: '30px' }}>
+          <Row>
+            <Col>
+              
+            </Col>
+            <Col>
+            
+            </Col>
+            <Col>
+            
+            </Col>
+            <Col>
+            
+            </Col>
+          </Row>
 
                <Charts PieData={fetchData} />
     

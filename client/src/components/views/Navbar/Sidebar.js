@@ -1,6 +1,5 @@
 import './Sidebar.css';
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import { useSelector } from "react-redux";
 import SidebarData from './SidebarData';
 import SubMenu from './Submenu';
@@ -57,39 +56,6 @@ function Sidebar() {
                             </li>
 
                             <hr className="nav-hr" style={{ marginTop: 0, color: 'rgb(107, 119, 140)', height: 1, background: 'rgb(107, 119, 140)' }}/>
-                        
-                            {/* {SidebarData.map((item, index) => {
-                                return (
-                                    <li key={index}  style={{ color: '#6b778c' }}>
-                                        <Link to={item.path} onClick={item.subNav && showSubnav}>
-                                            <div style={{ display:'flex', justifyContent: 'space-between' }}>
-                                            <div>
-                                                {item.icon}
-                                                <span>{item.title}</span>
-                                            </div>
-                                            <div>
-                                                {item.subNav && subNav 
-                                                    ? item.iconOpened 
-                                                    : item.subNav
-                                                    ? item.iconClosed
-                                                    : null
-                                                }
-                                            </div>
-                                            </div>
-                                        </Link>
-                                        {subNav && item.subNav.map((item, index) => {
-                                            return (
-                                                <li key={index} style={{ alignItems: 'center', textDecoration: 'none', paddingLeft: '2rem' }}>
-                                                    <Link to={item.path} >
-                                                        {item.title}
-                                                    </Link>
-                                                </li>
-                                                
-                                            )
-                                        })}
-                                    </li>
-                                )
-                            })} */}
 
                             {SidebarData.map((item, index) => {
                                 return <SubMenu item={item} key={index} />
@@ -107,34 +73,3 @@ function Sidebar() {
 }
 
 export default Sidebar
-
-// {
-//     title: 'DASHBOARD',
-//     path: '/',
-//     icon: <AiFillPieChart />,
-//     cName: 'nav-text'
-// },
-// {
-//     title: 'USER',
-//     path: '/users',
-//     icon: <AiOutlineUsergroupAdd />,
-//     cName: 'nav-text'
-// },
-// {
-//     title: 'HOME',
-//     path: '/',
-//     icon: <AiOutlineHome />,
-//     cName: 'nav-text'
-// },
-// {
-//     title: 'HOME',
-//     path: '/',
-//     icon: <AiOutlineHome />,
-//     cName: 'nav-text'
-// },
-// {
-//     title: 'HOME',
-//     path: '/',
-//     icon: <AiOutlineHome />,
-//     cName: 'nav-text'
-// }

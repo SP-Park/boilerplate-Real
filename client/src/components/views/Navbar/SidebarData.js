@@ -1,4 +1,4 @@
-import { AiFillPieChart, AiOutlineHome, AiOutlineUsergroupAdd, AiOutlineDown, AiOutlineUp,AiOutlineContacts
+import { AiOutlineAreaChart, AiFillBank, AiOutlineUsergroupAdd, AiOutlineDown, AiOutlineUp,AiOutlineContacts
 ,AiOutlineDatabase, AiOutlineAlert, AiOutlineRise
 } from "react-icons/ai";
 
@@ -8,7 +8,7 @@ export const SidebarData = [
         title: '고객 관리',
         path: '/',
         className: 'nav-text',
-        icon: <AiOutlineContacts />,
+        icon: <AiFillBank />,
         iconClosed: <AiOutlineDown />,
         iconOpened: <AiOutlineUp />,
         subNav: [
@@ -128,7 +128,7 @@ export const SidebarData = [
         title: '통계',
         path: '/users',
         className: 'nav-text',
-        icon: <AiOutlineRise />,
+        icon: <AiOutlineAreaChart />,
         iconClosed: <AiOutlineDown />,
         iconOpened: <AiOutlineUp />,
         subNav: [
@@ -170,7 +170,7 @@ export const SidebarData = [
             {
                 title: '접속 기록',
                 className: 'nav-text',
-                path: '/'
+                path: '/security/connections'
             },
             {
                 title: '배정순서 관리',

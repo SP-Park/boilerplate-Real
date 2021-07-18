@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useDispatch } from "react-redux";
 import { registerUser } from '../../actions/user_actions';
@@ -11,11 +11,24 @@ function RegisterPage(props) {
     const password = useRef()
     password.current = watch('password')
     console.log(watch("email"));
+    const [GeoData, setGeoData] = useState(null)
+    const [Images, setImages] = useState([])
 
     const dispatch = useDispatch()
 
     const onSubmit = (data) => {
-        dispatch(registerUser(data))
+
+        let body = {
+            email: data.email,
+            name: data.name,
+            images: Images,
+            ip: GeoData,
+            password: data.password,
+            role: data.role,
+            address: data.address
+        }
+
+        dispatch(registerUser(body))
         .then (response => {
             if(response.payload.success) {
                 props.history.push('/login');
@@ -26,10 +39,22 @@ function RegisterPage(props) {
     }
 
 
+    const updateImages = (newImages) => {
+        setImages(newImages)
+    }    
+
+    useEffect(() => {
+        fetch('http://api.ipify.org/?format=json')
+        .then(response => response.json())
+        .then(data => setGeoData(data))
+    }, [])
+
+    
+
     return (
         <div className="container" style={{ marginTop: '30px' }}>
             <Form onSubmit={handleSubmit(onSubmit)}>
-                <FileUpload />
+                <FileUpload refreshFunction={updateImages}/>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control 

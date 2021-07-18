@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Form, Button, Col } from 'react-bootstrap';
 import { useDispatch } from "react-redux";
 import { registerUser } from '../../../actions/user_actions';
@@ -9,6 +9,7 @@ import FileUpload from '../../Utils/FileUpload';
 function NewUser(props) {
 
     const [Images, setImages] = useState([])
+    const [GeoData, setGeoData] = useState(null)
     const { register, handleSubmit, watch, errors } = useForm();
     const password = useRef()
     password.current = watch('password')
@@ -20,12 +21,20 @@ function NewUser(props) {
         setImages(newImages)
     }
 
+    useEffect(() => {
+        fetch('http://api.ipify.org/?format=json')
+        .then(response => response.json())
+        .then(data => setGeoData(data.ip))
+    }, [])
+
+
     const onSubmit = (data) => {
 
         let body = {
             email: data.email,
             name: data.name,
             images: Images,
+            ip: GeoData,
             password: data.password,
             role: data.role,
             address: data.address

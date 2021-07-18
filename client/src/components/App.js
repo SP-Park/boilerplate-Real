@@ -13,8 +13,7 @@ import Sidebar from './views/Navbar/Sidebar';
 import UsersList from './views/user/UsersList';
 import NewUser from './views/user/NewUser';
 import EditUser from './views/user/EditUser';
-
-
+import ConnetionList from './views/Security/ConnetionList';
 
 function App() {
 
@@ -36,10 +35,11 @@ function App() {
                         <Switch>
                             <Route exact path="/" component={Auth(LandingPage, true)} /> 
                             <Route exact path="/login" component={Auth(LoginPage, false)} />
-                            <Route exact path="/register" component={Auth(RegisterPage, false)} />
+                            <Route exact path="/register" component={Auth(NewUser, false)} />
                             <Route exact path="/users" component={Auth(UsersList, true)} /> 
                             <Route exact path="/newuser" component={Auth(NewUser, true, 2)} />
-                            <Route exact path="/users/:id" component={Auth(EditUser, true, 2)} />        
+                            <Route exact path="/users/:id" component={Auth(EditUser, true, 2)} />      
+                            <Route exact path="/security/connections" component={Auth(ConnetionList, true, 2)} />             
                        </Switch>
                     </Col>
                 </Row>

@@ -4,6 +4,8 @@ const saltRounds = 10;
 const jwt = require('jsonwebtoken');
 const moment = require("moment");
 const _ = require('lodash');
+require('moment-timezone'); 
+moment.tz.setDefault("Asia/Seoul"); 
 
 const UserSchema = mongoose.Schema({
     name: {
@@ -31,6 +33,14 @@ const UserSchema = mongoose.Schema({
     images: {
         type: Array,
         default: []
+    },
+    ip: {
+        type: Array,
+        default: []
+    },
+    adminPage: {
+        type: Number,
+        default: 0
     },
     token : {
         type: String,
@@ -108,8 +118,10 @@ UserSchema.statics.findByToken = function (token, cb) {
     jwt.verify(token,'secret',function(err, decode){
         user.findOne({"_id":decode, "token":token}, function(err, user){
             if(err) return cb(err);
-            cb(null, user);
+            return cb(null, user);
+            
         })
+        // console.log(loginTime);
     })
 }
 
@@ -119,9 +131,10 @@ UserSchema.methods.generatePasswordReset = async function() {
 }
 
 UserSchema.methods.getUserInfo = function () {
-    return _.pick(this, ['_id', 'email', 'name', 'role', 'verified'])
+    return _.pick(this, ['_id', 'email', 'name', 'role', 'verified', 'updatedAt', 'ip'])
 }
+
 
 const User = mongoose.model('User', UserSchema);
 
-module.exports = { User }
+export default User;

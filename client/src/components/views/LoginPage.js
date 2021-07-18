@@ -1,31 +1,53 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button, Image, Jumbotron } from 'react-bootstrap';
 
 import { useDispatch } from "react-redux";
 import { loginUser } from '../../actions/user_actions';
 import { useForm } from 'react-hook-form';
 
+
 function LoginPage(props) {
 
     const dispatch = useDispatch()
     const { register, handleSubmit, watch, errors } = useForm();
+    const [GeoData, setGeoData] = useState(null)
 
     const onSubmit = (data) => {
-        dispatch(loginUser(data))
+
+        let body = {
+            email: data.email,
+            name: data.name,
+            password: data.password,
+            role: data.role,
+            address: data.address,
+            ip: GeoData
+        }
+
+        dispatch(loginUser(body))
         .then (response => {
-            if(response.payload.loginSuccess) {
+            if(response.payload.loginSuccess) {              
                 props.history.push('/');
             } else {
                 alert('Check out your Account or Password again')
             }
         })
+        
     }
+
+    useEffect(() => {
+        fetch('http://api.ipify.org/?format=json')
+        .then(response => response.json())
+        .then(data => setGeoData(data.ip))
+    }, [])
+
+     console.log(GeoData)   
+
 
     return (
         <Container style={{ marginTop: '10%' }}>
-            <Row className="app">
+            <Row className="app" style={{ alignItems: 'center' }}>
                 <Col>
-                    <Jumbotron>
+                    <Jumbotron style={{ paddingTop: '30px', paddingBottom: '30px' }}>
                         <h1>Welcome!</h1>
                         <p>
                             Have a wonderful day !
@@ -59,7 +81,7 @@ function LoginPage(props) {
                     </Form>
                 </Col>
                 <Col>
-                <Image src="/work-start.jpg" thumbnail />
+                <Image src="/work-start.jpg" thumbnail style={{ height: '450px' }} />
                 </Col>
 
             

@@ -6,11 +6,12 @@ function Submenu({ item,index }) {
     const [subnav, setSubnav] = useState(false);
     const showSubnav = () => setSubnav(!subnav);
 
+
     return (
         <>
         <li key={index} className={item.className} style={{ color: '#6b778c' }}>
         <Link to={item.path} 
-        onClick={item.subNav && showSubnav}>
+        onClick={item.subNav && showSubnav }>
             <div style={{ display:'flex', justifyContent: 'space-between', width: '95%'  }}>
                 <div>
                     {item.icon}
@@ -28,7 +29,7 @@ function Submenu({ item,index }) {
         </li>
         {subnav &&
           item.subNav.map((item, index) => {
-            return (
+            return (     
                 <li key={index} className={item.className} style={{ alignItems: 'center', textDecoration: 'none', paddingLeft: '2rem' }}>
                     <Link to={item.path} style={{ paddingLeft: '0px'}}>
                         {item.icon}

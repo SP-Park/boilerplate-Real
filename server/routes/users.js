@@ -1,13 +1,10 @@
 import { Router } from 'express';
-const mongoose = require('mongoose');
 import { randomBytes } from 'crypto';
-const { User } = require('../models/User');
+import { Profile, User } from '../models';
 const { auth } = require("../middleware/auth");
-import { pick, reduce } from 'lodash';
 import multer from 'multer';
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-
 
 
 const router = Router()
@@ -53,7 +50,7 @@ router.get("/auth", auth, (req, res) => {
 router.post("/register", async (req, res) => {
     console.log(req.body)
     try {
-        let { name, email } = req.body;
+        let { name, email, ip, adminPage } = req.body;
         let user = await User.findOne({ name })
         if(user) {
             return res.status(400).json({
@@ -72,12 +69,26 @@ router.post("/register", async (req, res) => {
             ...req.body, 
             verificationCode: randomBytes(20).toString('hex')
         })
+
+        let profile = new Profile ({
+            account: user._id,
+            ip: ip,
+            createdTime: Date.now(),
+            adminPage: adminPage
+        })
+        await profile.save((err, doc) => {
+            if (err) return res.json({ success: false, err });
+        })
+
         await user.save((err, doc) => {
             if (err) return res.json({ success: false, err });
             return res.status(200).json({
                 success: true
             });
         })
+        console.log('User', user)
+        
+
     } catch (err) {
         console.log('ERR :', err.message)
         return res.status(500).json({
@@ -85,10 +96,15 @@ router.post("/register", async (req, res) => {
             messgae: 'AN error accurred...'
         })
     }
+
 });
 
 
 router.post("/login", (req, res) => {
+
+
+    console.log(req.body)
+
     User.findOne({ email: req.body.email }, (err, user) => {
         if (!user)
             return res.json({
@@ -99,6 +115,7 @@ router.post("/login", (req, res) => {
         user.comparePassword(req.body.password, (err, isMatch) => {
             if (!isMatch)
                 return res.json({ loginSuccess: false, message: "Wrong password" });
+    
 
             user.generateToken((err, user) => {
                 if (err) return res.status(400).send(err);
@@ -111,6 +128,31 @@ router.post("/login", (req, res) => {
                     });
             });
         });
+
+
+        Profile.findOneAndUpdate(
+            { account: user._id },
+            {
+                $push: {
+                    loginTime: Date.now()
+                }
+            },
+            { new: true },
+            (err, doc) => {
+                if (err) {
+                    res.status(400).json({ success: false, err })
+                    return
+                }  
+                // if(!err) {
+                //     res.status(200).json({
+                //         success: true
+                //     })
+                //     return
+                // }
+                
+            }
+        )
+    
     });
 });
 
@@ -125,10 +167,13 @@ router.get('/userslist', auth, async (req, res) => {
 
 
 router.get("/logout", auth, (req, res) => {
+    let logOutTime = Date.now(req.body)
+    console.log(logOutTime)
     User.findOneAndUpdate({ _id: req.user._id }, { token: "", tokenExp: "" }, (err, doc) => {
-        if (err) return res.json({ success: false, err });
+        if (err) return res.json({ success: false, logOutTime: logOutTime, err });
         return res.status(200).send({
-            success: true
+            success: true, 
+            logOutTime: logOutTime,
         });
     });
 });
@@ -192,14 +237,6 @@ router.get('/delete_user/:id', async (req, res) => {
         success: true
     })
 })
-
-
-
-// app.put('/campgrounds/:id', async (req, res) => {
-//     const { id } = req.params;
-//     const campground = await Campground.findByIdAndUpdate(id, { ...req.body.campground });
-//     res.redirect(`/campgrounds/${campground._id}`)
-// });
 
 
 export default router;
