@@ -1,8 +1,10 @@
 import './App.css';
-import React, { Suspense, useState } from 'react';
-import { BrowserRouter ,Route, Switch } from "react-router-dom";
+import React, { Suspense, useEffect } from 'react';
+import { BrowserRouter ,Route, Switch, useHistory  } from "react-router-dom";
 import Auth from "../hoc/auth";
 import { Container, Row, Col } from 'react-bootstrap';
+import ReactGA from 'react-ga';
+import dotenv from 'dotenv';
 
 //Page
 import LandingPage from './views/LandingPage';
@@ -15,15 +17,14 @@ import NewUser from './views/user/NewUser';
 import EditUser from './views/user/EditUser';
 import ConnetionList from './views/Security/ConnetionList';
 
+dotenv.config();
+
 function App() {
 
 
-
-    
-
     return (
         <Container fluid className="App">
-        <BrowserRouter>
+        <BrowserRouter >
         <Suspense fallback={(<div>Loading...</div>)}>
         <Menu />
             <Container fluid className='main'>
@@ -31,7 +32,7 @@ function App() {
                     <Col xs={2} id="sidebar-wrapper">
                          <Sidebar />
                     </Col>
-                    <Col xs={10} id="page-content-wrapper">
+                    <Col xs={9} id="page-content-wrapper">
                         <Switch>
                             <Route exact path="/" component={Auth(LandingPage, true)} /> 
                             <Route exact path="/login" component={Auth(LoginPage, false)} />

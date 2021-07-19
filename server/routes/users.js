@@ -5,6 +5,7 @@ const { auth } = require("../middleware/auth");
 import multer from 'multer';
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+import moment from 'moment-timezone';
 
 
 const router = Router()
@@ -69,6 +70,7 @@ router.post("/register", async (req, res) => {
             ...req.body, 
             verificationCode: randomBytes(20).toString('hex')
         })
+        
 
         let profile = new Profile ({
             account: user._id,
@@ -128,13 +130,15 @@ router.post("/login", (req, res) => {
                     });
             });
         });
-
+        
+        let agreementTime = moment().tz('Asia/Seoul').format('YYYY-MM-DDTHH:mm:ss');
+        // console.log(`agreementTime = ${agreementTime}`);
 
         Profile.findOneAndUpdate(
             { account: user._id },
             {
                 $push: {
-                    loginTime: Date.now()
+                    loginTime: agreementTime
                 }
             },
             { new: true },
