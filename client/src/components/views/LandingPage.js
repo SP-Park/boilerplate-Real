@@ -66,24 +66,25 @@ function LandingPage() {
   return (
     <Container fluid style={{ marginTop: '30px' }}>
       <Row>
-        <Col style={{ borderRadius: '15px', backgroundColor: '#fff', padding: '15px' }}>
-        <h4 style={{ textAlign: 'center' }}>Members</h4>
+        <Col style={{ borderRadius: '15px', backgroundColor: '#fff', padding: '15px', marginRight: '10px' }}>
+        <span style={{ 
+            backgroundColor: '#17a2b8', width: '100px', height: '50px', 
+            fontSize: '20px', position: 'absolute', textAlign: 'center', 
+            paddingTop: '10px', color: '#fff', top: '-10px' }}>
+              Members</span>
          <PieChart_1 PieData={fetchData}/>
          <hr />
          <Link to="/users">See all members <AiOutlineArrowRight/></Link>
         </Col>
-        <Col>
-          <Card style={{ width: '18rem' }}>
-            <Card.Img variant="top" src="holder.js/100px180" />
-            <Card.Body>
-              <Card.Title>Card Title</Card.Title>
-              <Card.Text>
-                Some quick example text to build on the card title and make up the bulk of
-                the card's content.
-              </Card.Text>
-              <Button variant="primary">Go somewhere</Button>
-            </Card.Body>
-          </Card>
+        <Col style={{ borderRadius: '15px', backgroundColor: '#fff', padding: '15px' }}>
+        <span style={{ 
+            backgroundColor: '#17a2b8', width: '100px', height: '50px', 
+            fontSize: '20px', position: 'absolute', textAlign: 'center', 
+            paddingTop: '10px', color: '#fff', top: '-10px' }}>
+              Members</span>
+         <PieChart_1 PieData={fetchData}/>
+         <hr />
+         <Link to="/users">See all members <AiOutlineArrowRight/></Link>
         </Col>
         <Col>
           <Card style={{ width: '18rem' }}>
